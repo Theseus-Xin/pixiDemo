@@ -17,13 +17,15 @@ export default {
     return {
       app: null,
       allTimeLine: null,
-      img1: []
+      img1: [],
+      imgArr: [],
+      spr2: null
     }
   },
   mounted() {
     this.img1 = ['/images/p1-p1.png']
     this.allTimeLine = gsap.timeline({ paused: true })
-
+    this.getImg()
     this.setup()
   },
   methods: {
@@ -38,20 +40,21 @@ export default {
       spr.anchor.set(0.5, 0.5)
       spr.alpha = 0
       this.app.stage.addChild(spr)
-      this.animatedSprite()
+      // this.animatedSprite()
       this.alloyTouch()
       this.getTweenMax(spr)
+      this.vortex()
     },
-    // animatedSprite
-    animatedSprite() {
-      let imgArr = []
+    getImg() {
       for (let i = 0; i < 52; i++) {
         let spr = PIXI.Texture.from(`/images/x${i + 1}.png`)
         let rect = new PIXI.Rectangle(0, 0, 1318, 1448)
         let imgSprArrItem = new PIXI.Texture(spr, rect)
-        imgArr.push(imgSprArrItem)
+        this.imgArr.push(imgSprArrItem)
       }
-      let animatedSpr = new PIXI.AnimatedSprite(imgArr)
+    },
+    animatedSprite() {
+      let animatedSpr = new PIXI.AnimatedSprite(this.imgArr)
       animatedSpr.position.set(0, 0)
       animatedSpr.animationSpeed = 0.1
       animatedSpr.play()
@@ -74,24 +77,47 @@ export default {
           let myProgress = value / moveMin
           console.log(myProgress);
           that.allTimeLine.seek(myProgress)
+          that.animationPlay(myProgress)
         },
       })
     },
     myFunction() {
       console.log('q234432');
-
     },
     getTweenMax(spr) {
       let t1 = gsap.timeline({ delay: 0.3 })
       let tweenMax1 = gsap.to(spr, { alpha: 1 })
       t1.add(tweenMax1, 0)
       this.allTimeLine.add(t1, 0)
+    },
+    vortex() {
+      this.spr2 = PIXI.Sprite.from(this.imgArr[0])
+      this.spr2.position.set(375, 724)
+      this.spr2.anchor.set(0.5, 0.5)
+      this.spr2.alpha = 0
+      this.app.stage.addChild(this.spr2)
+      this.tweenMax2(this.spr2)
+    },
+    tweenMax2(spr2) {
+      let t2 = gsap.timeline({ delay: 0.5 })
+      let tw2 = gsap.to(spr2, { duration: 0.1, alpha: 1 })
+      t2.add(tw2, 0)
+      this.allTimeLine.add(t2, 0)
+    },
+    animationPlay(progress) {
+      if (progress > 0.6) {
+        let length = this.imgArr.length
+        let i = Math.floor((progress - 0.6) / 0.3 * length)
+        console.log('index', length);
+        if (i < length) {
+          console.log(`/images/x${i + 1}.png`);
+          this.spr2.texture = PIXI.Texture.from(`/images/x${i + 1}.png`)
+        }
+      }
     }
   },
 }
 </script>
 <style>
-#stage canvas {
-  width: 100%;
-}
+
 </style>
