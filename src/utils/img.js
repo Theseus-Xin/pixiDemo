@@ -1,54 +1,54 @@
 const p1Arr = [
-    "/images/bg.jpg",
-    "/images/ewm.png",
-    "/images/logo.png",
-    "/images/musicoff.png",
-    "/images/musicon.png",
-    "/images/p1-bg.png",
-    "/images/p1-cloud1.png",
-    "/images/p1-cloud2.png",
-    "/images/p1-grass1.png",
-    "/images/p1-grass2.png",
-    "/images/p1-house.png",
-    "/images/p1-p1.png",
-    "/images/p1-star.png",
-    "/images/p1-tree.png"
+    "../../app/demo/images/bg.jpg",
+    "../../app/demo/images/ewm.png",
+    "../../app/demo/images/logo.png",
+    "../../app/demo/images/musicoff.png",
+    "../../app/demo/images/musicon.png",
+    "../../app/demo/images/p1-bg.png",
+    "../../app/demo/images/p1-cloud1.png",
+    "../../app/demo/images/p1-cloud2.png",
+    "../../app/demo/images/p1-grass1.png",
+    "../../app/demo/images/p1-grass2.png",
+    "../../app/demo/images/p1-house.png",
+    "../../app/demo/images/p1-p1.png",
+    "../../app/demo/images/p1-star.png",
+    "../../app/demo/images/p1-tree.png"
 ]
 const p2Arr = [
-    "/images/p2-1.png",
-    "/images/p2-boy.png",
-    "/images/p2-huati.png",
-    "/images/p2-lotsofyinfu.png",
-    "/images/p2-mother.png",
-    "/images/p2-school.png",
-    "/images/p2-shitou.png",
-    "/images/p2-tree4.png",
-    "/images/p2-wutai.png",
-    "/images/p2-yinfu.png",
+    "../../app/demo/images/p2-1.png",
+    "../../app/demo/images/p2-boy.png",
+    "../../app/demo/images/p2-huati.png",
+    "../../app/demo/images/p2-lotsofyinfu.png",
+    "../../app/demo/images/p2-mother.png",
+    "../../app/demo/images/p2-school.png",
+    "../../app/demo/images/p2-shitou.png",
+    "../../app/demo/images/p2-tree4.png",
+    "../../app/demo/images/p2-wutai.png",
+    "../../app/demo/images/p2-yinfu.png",
 ]
 
 const p2Arr2 = []
 for (let i = 1; i <= 34; i++) {
-    p2Arr2.push(`/images/w${i}.png`)
+    p2Arr2.push(`../../app/demo/images/w${i}.png`)
 }
 
 const p3Arr = [
-    "/images/p3-1.png",
-    "/images/p3-2.png",
-    "/images/p3-3.png",
-    "/images/p3-childbirth.png",
+    "../../app/demo/images/p3-1.png",
+    "../../app/demo/images/p3-2.png",
+    "../../app/demo/images/p3-3.png",
+    "../../app/demo/images/p3-childbirth.png",
 ]
 
 const p4Arr = [
-    "/images/p4-1.png",
-    "/images/p4-bg.png",
-    "/images/p4-house3.png",
-    "/images/p4-start.png",
+    "../../app/demo/images/p4-1.png",
+    "../../app/demo/images/p4-bg.png",
+    "../../app/demo/images/p4-house3.png",
+    "../../app/demo/images/p4-start.png",
 ]
 
 const p5Arr = []
 for (let i = 1; i <= 52; i++) {
-    p5Arr.push(`/images/x${i}.png`)
+    p5Arr.push(`../../app/demo/images/x${i}.png`)
 }
 
 //spriteGroupBg

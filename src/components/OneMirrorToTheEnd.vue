@@ -1,5 +1,6 @@
 <template>
     <div id="stage"></div>
+    <div class="musicIcon" id="musicIcon"></div>
 </template>
 
 <script>
@@ -22,7 +23,7 @@ export default {
         return {
             completed: false,
             stage: null,
-            maxLong: -(10800 - 750),
+            maxLong: -(9750 - 750),
             // 总时间轴
             allTimeLine: null
             // 加载素材，数组
@@ -31,6 +32,9 @@ export default {
     mounted() {
         this.preLoad()
         this.totalTime()
+        // this.audioPause("bg")
+        // this.audioPause("ding")
+        // this.audioPause("huanhu")
     },
     methods: {
 
@@ -84,6 +88,11 @@ export default {
             this.tweenAction()
             this.star()
             this.house()
+            this.scene2()
+            this.note()
+            this.window()
+            this.work()
+            this.showVortex()
         },
         initSprite({ sprName, x, parent = this.stage.stage, alpha = 1, pivotX, pivotY }) {
             let spr = new PIXI.Container()
@@ -132,6 +141,8 @@ export default {
                         let myProgress = value / that.maxLong
                         // console.log(myProgress);
                         that.allTimeLine.seek(myProgress)
+                        that.animationPlay(myProgress)
+                        that.vortex(myProgress)
                     }
                 },
             })
@@ -155,28 +166,123 @@ export default {
         // 星星显现"spriteGroupScenes/scene1/p1Star"
         star() {
             const star = this.stage.stage.getChildByName("spriteGroupScenes").getChildByName('scene1').getChildByName("p1Star")
-            const starStartTime = -15 / this.maxLong
-            const starDuringTime = -25 / this.maxLong
-            const t1 = gsap.timeline({ delay: starStartTime })
-            const w1 = gsap.to(star, { duration: starDuringTime, alpha: 1 })
+            const startTime = -15 / this.maxLong
+            const duringTime = -25 / this.maxLong
+            const t1 = gsap.timeline({ delay: startTime })
+            const w1 = gsap.to(star, { duration: duringTime, alpha: 1 })
             t1.add(w1, 0)
             this.allTimeLine.add(t1, 0)
         },
         // 房子放大"spriteGroupScenes/scene1/p1House"
         house() {
             const house = this.stage.stage.getChildByName("spriteGroupScenes").getChildByName('scene1')
-            const houseStartTime = -600 / this.maxLong
-            const houseDuringTime = -190 / this.maxLong
-            const t1 = gsap.timeline({ delay: houseStartTime })
-            const w1 = gsap.to(house, { duration: houseDuringTime, scale: 3, })
+            const startTime = -600 / this.maxLong
+            const duringTime = -200 / this.maxLong
+            const t1 = gsap.timeline({ delay: startTime })
+            const w1 = gsap.to(house, { duration: duringTime, alpha: 0 })
             t1.add(w1, 0)
             this.allTimeLine.add(t1, 0)
-        }
+        },
+        scene2() {
+            const scene2 = this.stage.stage.getChildByName("spriteGroupScenes").getChildByName('scene2')
+            const startTime = -680 / this.maxLong
+            const duringTime = -100 / this.maxLong
+            const t1 = gsap.timeline({ delay: startTime })
+            const w1 = gsap.to(scene2, { duration: duringTime, alpha: 1 })
+            t1.add(w1, 0)
+            this.allTimeLine.add(t1, 0)
+        },
         // 音符飘动"spriteGroupScenes/scene2/p2Yinfu"
+        note() {
+            const note = this.stage.stage.getChildByName("spriteGroupScenes").getChildByName('scene2').getChildByName('p2Yinfu')
+            const startTime = -2450 / this.maxLong
+            const duringTime = -300 / this.maxLong
+            const t1 = gsap.timeline({ delay: startTime })
+            const w1 = gsap.to(note, { duration: duringTime, x: 3400, y: 300 })
+            t1.add(w1, 0)
+            this.allTimeLine.add(t1, 0)
+        },
         // 小孩走路"spriteGroupScenes/scene2/p2Child"
+        animationPlay(progress) {
+            const step = -1000;
+            const duringTime = (-2200 - step) / this.maxLong
+            if (progress >= duringTime) {
+                const len = p2Arr2.length
+                const i = Math.floor((progress - step / this.maxLong) / duringTime * len)
+                if (i < len) {
+                    this.stage.stage.getChildByName("spriteGroupScenes").getChildByName('scene2').getChildByName('p2Child').texture = PIXI.Texture.from(p2Arr2[i])
+                }
+            }
+        },
         // 黑夜缩小窗户"spriteGroupScenes/scene3/p32"
+        window() {
+            const note = this.stage.stage.getChildByName("spriteGroupScenes").getChildByName('scene3').getChildByName('p32')
+            const startTime = -2580 / this.maxLong
+            const duringTime = -400 / this.maxLong
+            const t1 = gsap.timeline({ delay: startTime })
+            const w1 = gsap.to(note, { duration: duringTime, x: 0, y: -20 })
+            t1.add(w1, 0)
+            this.allTimeLine.add(t1, 0)
+        },
+        // 工作中的小男孩
+        work() {
+            const work = this.stage.stage.getChildByName("spriteGroupScenes").getChildByName('scene3').getChildByName('p31')
+            const startTime = -2780 / this.maxLong
+            const duringTime = -600 / this.maxLong
+            const t1 = gsap.timeline({ delay: startTime })
+            const w1 = gsap.to(work, { duration: duringTime, alpha: 1 })
+            t1.add(w1, 0)
+            this.allTimeLine.add(t1, 0)
+        },
+        showVortex() {
+            const vortex = this.stage.stage.getChildByName("spriteGroupLast").getChildByName('bgLast')
+            const startTime = -7500 / this.maxLong
+            const duringTime = -1500 / this.maxLong
+            const t1 = gsap.timeline({ delay: startTime })
+            const w1 = gsap.to(vortex, { duration: duringTime, alpha: 1 })
+            t1.add(w1, 0)
+            this.allTimeLine.add(t1, 0)
+        },
         // 旋涡出现"spriteGroupLast/bgLast"
+        vortex(progress) {
+            const startTime = -7500 / this.maxLong
+            const duringTime = -1500 / this.maxLong
+            if (progress >= startTime) {
+                console.log(progress);
+                const len = p5Arr.length
+                const i = Math.floor((progress - startTime) / duringTime * len)
+                if (i < len && i >= 0) {
+                    console.log(i);
+                    this.stage.stage.getChildByName("spriteGroupLast").getChildByName('bgLast').texture = PIXI.Texture.from(p5Arr[i])
+                }
+            }
+        },
+        // 音频
+        audioPlay(id) {
+            let au = document.getElementById(id)
+            au.play()
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                au.play()
+            })
+        },
+        audioPause(id) {
+            let au = document.getElementById(id)
+            au.pause()
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                au.pause()
+            })
+        },
+        // 加载页
     },
 }
 </script>
-<style></style>
+<style>
+.audioBox {
+    display: none;
+}
+
+
+.musicIcon {}
+
+.mplay {}
+</style>
